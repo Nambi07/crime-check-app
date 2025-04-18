@@ -15,10 +15,10 @@ from pymongo import MongoClient
 import datetime
 
 # ✅ Local imports from utils
-from utils.alert import send_alerts
-from utils.gps_blocker import block_location
-from utils.sms_alert import send_sms
-from utils.captcha import verify_captcha
+ import send_alerts
+ import block_location
+ import send_sms
+ import verify_captcha
 
 app = Flask(__name__)
 CORS(app)
