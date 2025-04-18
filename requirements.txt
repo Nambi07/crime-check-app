@@ -1,8 +1,5 @@
-flask
+Flask
 flask-cors
 numpy
 tensorflow
 pymongo
-python-telegram-bot
-twilio
-requests
