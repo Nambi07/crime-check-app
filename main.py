@@ -14,6 +14,11 @@ from tensorflow.keras.models import load_model
 from pymongo import MongoClient
 import datetime
 
+from utils.alert import send_alerts
+from utils.gps_blocker import block_location
+from utils.sms_alert import send_sms
+from utils.captcha import verify_captcha
+
 # ✅ Local imports from utils
  import send_alerts
  import block_location
