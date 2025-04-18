@@ -1,2 +1,2 @@
 def block_location(location):
-    print(f"[GPS BLOCKER] Blocking location: {location} from further transactions")
+    print(f"📍 GPS Blocker triggered for suspicious location: {location}")
