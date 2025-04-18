@@ -1,7 +1,7 @@
 import os
 import sys
 
-# ✅ Add current directory to sys.path so 'utils' can be imported
+# Add current directory to sys.path so 'utils' can be imported
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Hides TensorFlow info messages
@@ -14,7 +14,7 @@ from tensorflow.keras.models import load_model
 from pymongo import MongoClient
 import datetime
 
-# ✅ Local imports from utils
+# Local imports from utils
 from utils.alert import send_alerts
 from utils.gps_blocker import block_location
 from utils.sms_alert import send_sms
@@ -69,6 +69,8 @@ def download_csv(user_id):
     import csv
     from io import StringIO
     records = list(transactions.find({"user_id": user_id}))
+    if not records:
+        return jsonify({"error": "No records found for user"}), 404
     output = StringIO()
     writer = csv.writer(output)
     writer.writerow(records[0].keys())
@@ -76,17 +78,18 @@ def download_csv(user_id):
         writer.writerow(row.values())
     return output.getvalue(), 200, {'Content-Type': 'text/csv'}
 
-# 🔽 This will run send_alerts for testing when the app starts
-test_record = {
-    "user_id": "test_user",
-    "features": [0.1, 0.2, 0.3],
-    "amount": 100.0,
-    "location": "Chennai",
-    "confidence": 0.95,
-    "is_fraud": True,
-    "timestamp": datetime.datetime.now()
-}
-send_alerts(test_record)
+# Send test alert during development
+if app.debug:
+    test_record = {
+        "user_id": "test_user",
+        "features": [0.1, 0.2, 0.3],
+        "amount": 100.0,
+        "location": "Chennai",
+        "confidence": 0.95,
+        "is_fraud": True,
+        "timestamp": datetime.datetime.now()
+    }
+    send_alerts(test_record)
 
 if __name__ == '__main__':
     app.run(debug=True)
