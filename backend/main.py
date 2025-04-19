@@ -14,7 +14,7 @@ from tensorflow.keras.models import load_model
 from pymongo import MongoClient
 import datetime
 
-from utils.send_alerts import send_alerts
+from utils.alert import send_alerts  # if the function is in alert.py
 from utils.gps_blocker import block_location
 from utils.sms_alert import send_sms
 from utils.captcha import verify_captcha
